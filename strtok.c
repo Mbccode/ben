@@ -18,13 +18,13 @@ char *_strtok(char *str, const char *delim)
 	if (next_Tok == NULL || *next_Tok == '\0')
 		return (NULL); /* No more tokens to parse*/
 
-	tok_St = strtok_help(next_Tok, delim); /* Find the start of the next token */
-	tok_End = _strpbrk(tok_St, delim); /* Find the end of the token */
+	tok_St = strtok_help(next_Tok, delim); /* Find the start of the next_tok */
+	tok_End = _strpbrk(tok_St, delim); /* Find the end of the tok_end */
 
 	if (tok_End != NULL)
 	{
 		tok_End = '\0'; /* Replace the delimiter with a null terminator */
-		next_Tok = tok_End + 1; /* Set the nextToken pointer for the next call */
+		next_Tok = tok_End + 1; /* Set the next_Tok pointer for the next call */
 	}
 	else
 	{
