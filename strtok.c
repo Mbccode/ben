@@ -13,42 +13,27 @@ char *_strtok(char *str, const char *delim)
 	static char *next_Tok;
 
 	if (str != NULL)
-		next_Tok = str; /* Initialize or reset the tokenized */
+		next_Tok = str;
 
-	if (next_Tok == NULL || *next_Tok == '\0')
-		return (NULL); /* No more tokens to parse*/
+	if (next_Tok == NULL)
+		return (NULL);
 
-	tok_St = strtok_help(next_Tok, delim); /* Find the start of the next_tok */
-	tok_End = _strpbrk(tok_St, delim); /* Find the end of the tok_end */
+	tok_St = next_Tok;
+	/* Find the end of the tok_end */
+	tok_End = _strpbrk(next_Tok, delim);
 
 	if (tok_End != NULL)
 	{
-		tok_End = '\0'; /* Replace the delimiter with a null terminator */
-		next_Tok = tok_End + 1; /* Set the next_Tok pointer for the next call */
+		*tok_End = '\0';
+		next_Tok = tok_End + 1;
 	}
 	else
 	{
-		next_Tok = NULL; /* No more tokens */
+		next_Tok = NULL;
 	}
-	return (tok_St); /* Return the current token */
+	return (tok_St);
 }
 
-
-/************ strtok_help Function************/
-
-/**
- * strtok_help - Entry point
- * @str: string variable
- * @delim: delimiter
- * Return: return the value of "str" on success
- */
-
-char *strtok_help(char *str, const char *delim)
-{
-	while (*str != '\0' && _strchr(delim, *str) != NULL)
-		str++;
-	return (str);
-}
 
 /*********** _STRBRK FUNCTION *************/
 
@@ -73,28 +58,6 @@ char *_strpbrk(const char *strGet, const char *strSET)
 				return ((char *)strGet);
 			str_set++;
 		}
-		strGet++;
-	}
-	return (NULL);
-}
-
-/********** _STRCHR FUNCTION **********/
-
-/**
- * _strchr - Function that iterates through a string to find
- * a character
- * @strGet: String to be iterated.
- * @charGet: Character to be found.
- * Return: A pointer to the character in the string or NULL
- *         if character is not found.
- */
-char *_strchr(const char *strGet, int charGet)
-{
-	while (*strGet != '\0')
-	{
-		/* strGet is cast to char* if condition is through*/
-		if (*strGet == charGet)
-			return ((char *)strGet);
 		strGet++;
 	}
 	return (NULL);

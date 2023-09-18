@@ -11,7 +11,7 @@ int main(void)
 	ssize_t getRV;
 	size_t nget = 0;
 
-	write(STDOUT_FILENO, prompt, 2);
+	write(STDOUT_FILENO, prompt, strlen(prompt));
 	getRV = _getline(&_get, &nget, stdin);
 
 	if (getRV == -1)
@@ -28,7 +28,11 @@ int main(void)
 	printf("%lu\n", strlen(_get));
 	
 	tok = _strtok(_get, " ");
-	printf("%s\n", tok);
+	while (tok != NULL)
+	{
+		printf("%s\n", tok);
+		tok = _strtok(NULL, " ");
+	}
 
 	free(_get);
 	return (0);
